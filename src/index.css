@@ -8,7 +8,7 @@ body {
 }
 
 header {
-  background-color: #ffefd5; /* Colores pastel */
+  background-color: #ffefd5; 
   color: #333;
   padding: 10px;
   display: flex;
@@ -23,7 +23,7 @@ header .logo img {
 
 h1 {
   text-align: center;
-  font-family: 'Comic Sans MS', cursive; /* Tipografía amigable */
+  font-family: 'Comic Sans MS', cursive; 
   font-weight: bold;
   display: inline;
 }
@@ -34,11 +34,11 @@ nav a {
   text-decoration: none;
   font-weight: bold;
   font-size: 1em;
-  transition: color 0.3s ease; /* Efecto de hover */
+  transition: color 0.3s ease; 
 }
 
 nav a:hover {
-  color: #ff6347; /* Color de hover */
+  color: #ff6347; 
 }
 
 .news-section {
@@ -60,11 +60,11 @@ nav a:hover {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  transition: transform 0.3s ease; /* Animación suave */
+  transition: transform 0.3s ease; 
 }
 
 .main-news img:hover {
-  transform: scale(1.05); /* Efecto de zoom */
+  transform: scale(1.05); 
 }
 
 .main-news .news-title {
@@ -94,7 +94,7 @@ nav a:hover {
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease; /* Efecto al pasar el mouse */
+  transition: box-shadow 0.3s ease; 
 }
 
 .side-news .news-item:hover {
