@@ -8,32 +8,37 @@ body {
 }
 
 header {
-    background-color: #ffc107;
-    color: black;
+    background-color: #ffefd5; /* Colores pastel */
+    color: #333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #e0a800;
+    border-bottom: 2px solid #ffdab9;
 }
 
 header .logo img {
     max-height: 40px;
 }
-h1 { text-align: center;
-    font-style: oblique;
-    font-weight: 900;
+
+h1 {
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive; /* Tipografía amigable */
+    font-weight: bold;
     display: inline;
-    display:flex;
-    
 }
 
 nav a {
     margin: 0 10px;
-    color: black;
+    color: #333;
     text-decoration: none;
     font-weight: bold;
     font-size: 1em;
+    transition: color 0.3s ease; /* Efecto de hover */
+}
+
+nav a:hover {
+    color: #ff6347; /* Color de hover */
 }
 
 .news-section {
@@ -55,6 +60,11 @@ nav a {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    transition: transform 0.3s ease; /* Animación suave */
+}
+
+.main-news img:hover {
+    transform: scale(1.05); /* Efecto de zoom */
 }
 
 .main-news .news-title {
@@ -84,6 +94,11 @@ nav a {
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease; /* Efecto al pasar el mouse */
+}
+
+.side-news .news-item:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .side-news .news-item img {
@@ -96,7 +111,7 @@ nav a {
 .side-news .news-title {
     margin-left: 10px;
     font-size: 0.9em;
-    color: black;
+    color: #333;
 }
 
 .articles-section,
@@ -113,94 +128,19 @@ footer {
     font-size: 1.1em;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: #f7f7f7;
-    margin: 10% auto;
-    padding: 20px;
-    border: 2px solid #e0a800;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.5s ease;
-}
-
-.close {
-    color: #e74c3c;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #c0392b;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-input, textarea, button {
-    margin-bottom: 15px;
-    padding: 15px;
-    font-size: 1.2em;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-input:focus, textarea:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
 button {
-    background-color: #e67e22;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    background-color: #ffefd5;
+    border: 2px solid #ffdab9;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
-    background-color: #d35400;
-}
-
-label {
-    font-size: 1.1em;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    background-color: #ffdab9;
+    transform: scale(1.05);
 }
 
 @media (min-width: 769px) {
@@ -270,36 +210,8 @@ label {
         font-size: 1.2em;
     }
 
-    .modal-content {
-        width: 90%;
-    }
-
     button {
         padding: 10px;
         font-size: 1em;
     }
-}
-
-button {
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #d35400;
-    transform: scale(1.05);
-}
-
-.success-message {
-    color: green;
-    font-size: 1.1em;
-    margin-top: 10px;
-    display: none; 
-}
-
-.error-message {
-    color: red;
-    font-size: 1.1em;
-    margin-top: 10px;
-    display: none; 
 }
