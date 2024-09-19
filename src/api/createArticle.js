@@ -3,7 +3,7 @@ const API_URL = "/api/articles";
 export async function createArticle(article) {
     try {
         const response = await fetch(API_URL, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -16,6 +16,7 @@ export async function createArticle(article) {
 
         return await response.json();
     } catch (error) {
-        console.error(error);
+        console.error("Error en crear Artículo",error);
+        throw error;
     }
 }
