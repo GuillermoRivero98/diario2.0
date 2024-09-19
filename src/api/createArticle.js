@@ -1,20 +1,21 @@
 const API_URL = "/api/articles";
 
-export async function getArticles() {
+export async function createArticle(article) {
     try {
-        const response = await fetch(API_URL,{
+        const response = await fetch(API_URL, {
             method: "GET",
             headers: {
-            "Content-Type": "application/json",
-        },
-            body: JSON.stringify(article    ),
-    });
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(article),
+        });
 
-    if(!response.ok) {
-        throw new Error("Error al obtener los artículos");
-    }
-    return await response.json();
-    }catch(error) {
+        if (!response.ok) {
+            throw new Error("Error al obtener los artículos");
+        }
+
+        return await response.json();
+    } catch (error) {
         console.error(error);
     }
 }

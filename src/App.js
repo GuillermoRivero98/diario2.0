@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./pages/Header";
 import Home from "./pages/Home";
-import New from "./pages/New";
+import New from "./pages/News";
 import Article from "./pages/Article";
 import SubmitArticle from "./pages/SubmitArticle";
-import { getArticle } from "./api/getArticles"
+import { getArticles } from "./api/getArticles"
 
 function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const fetchArticles = await getArticle();
+      const fetchArticles = await getArticles();
       setArticles(fetchArticles);
     }
     fetchData();

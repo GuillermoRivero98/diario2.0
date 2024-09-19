@@ -18,3 +18,4 @@ export async function getArticles() {
         console.error(error);
     }
 }
+
