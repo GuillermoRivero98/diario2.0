@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const {u4: uuid4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = 3001;
@@ -20,7 +20,7 @@ app.post('/articles', (req, res) => {
     if (!newArticle.title || !newArticle.author || !newArticle.content) {
         res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
-    newArticle.id = uuid4();
+    newArticle.id = uuidv4();
     articles.push(newArticle);
     res.status(201).json(newArticle);
 });
