@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./pages/Header";
+import Home from "./pages/Home";
+import New from "./pages/New";
 import Article from "./pages/Article";
 import SubmitArticle from "./pages/SubmitArticle";
-import Modal from "./components/Modal";
+import { getArticle } from "./api/getArticles"
 
-const App = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [article, setArticles] = useState(null);
+function App() {
+  const [articles, setArticles] = useState([]);
 
-  const handleAddArticle = (NewArticle) => {
-    setArticles([...articles, NewArticle]);
-  };
+  useEffect(() => {
+    async function fetchData() {
+      const fetchArticles = await getArticle();
+      setArticles(fetchArticles);
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div>
+    <Router>
       <Header />
       <main>
-        <button onClick={() => setShowModal(true)}>Redactar artículo</button>
-        <Article article={article} />
-        <Modal show={showModal} handleClose={() => setShowModal(false)}>
-          <SubmitArticle addArticle={handleAddArticle} />
-        </Modal>
+        <Routes>
+          <Route path="/" element={<Home articles={articles} />} />
+          <Route path="/new" element={<New articles={articles} />} />
+          <Route path="/article/:id" element={<Article articles={articles} />} />
+          <Route path="/submit" element={<SubmitArticle />} />
+        </Routes>
       </main>
-      <p>&copy; 2024 Revista Primera Infancia. Todos los derechos reservados.</p>
-    </div>
-
+      <footer>
+        <p>&copy; 2024 Revista Primera Infancia. Todos los derechos reservados.</p>
+      </footer>
+    </Router>
   );
-};
+}
+
 
 export default App;
 
