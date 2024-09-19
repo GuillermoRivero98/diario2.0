@@ -1,27 +1,32 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
 import Header from "./pages/Header";
-import News from "./pages/News";
 import Article from "./pages/Article";
-import Home from "./pages/Home";
+import SubmitArticle from "./pages/SubmitArticle";
+import Modal from "./components/Modal";
 
-function App() {
+const App = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [article, setArticles] = useState(null);
+
+  const handleAddArticle = (NewArticle) => {
+    setArticles([...articles, NewArticle]);
+  };
+
   return (
-    <Router>
+    <div>
       <Header />
       <main>
-        <Routes>
-          <Route path="/News" element={News} />
-          <Route path="/Article" element={Article} />
-          <Route exact path="/" element={Home} />
-        </Routes>
+        <button onClick={() => setShowModal(true)}>Redactar artículo</button>
+        <Article article={article} />
+        <Modal show={showModal} handleClose={() => setShowModal(false)}>
+          <SubmitArticle addArticle={handleAddArticle} />
+        </Modal>
       </main>
-      <footer>
-        <p>&copy; 2024 Revista Primera Infancia. Todos los derechos reservados.</p>
-      </footer>
-    </Router>
+      <p>&copy; 2024 Revista Primera Infancia. Todos los derechos reservados.</p>
+    </div>
 
   );
-}
+};
 
 export default App;
+
