@@ -15,14 +15,25 @@ app.get('/articles', (req, res) => {
     res.json(articles);
 });
 
+app.get('/articles/:id', (req, res) => {
+    const articleId = req.params.id;
+    const article = articles.find((article) => article.id === articleId);
+
+    if (!article) {
+        return res.status(404).json({ error: 'Artículo no encontrado' });
+    }
+    res.json(article);
+});
+
 app.post('/articles', (req, res) => {
+    console.log(req.body);
     const newArticle = req.body;
     if (!newArticle.title || !newArticle.author || !newArticle.content) {
-        res.status(400).json({ error: 'Todos los campos son obligatorios' });
+        return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
     newArticle.id = uuidv4();
     articles.push(newArticle);
-    res.status(201).json(newArticle);
+    return res.status(201).json(newArticle);
 });
 
 app.put('/articles/:id', (req, res) => {
@@ -40,7 +51,7 @@ app.put('/articles/:id', (req, res) => {
 
 
 app.delete('/articles/:id', (req, res) => {
-    const articleId = parseInt(req.params.id);
+    const articleId = req.params.id;
     const articleIndex = articles.findIndex((article) => article.id === articleId);
 
     if (articleIndex === -1) {
@@ -54,3 +65,4 @@ app.delete('/articles/:id', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
