@@ -12,17 +12,18 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+const fetchData = async () => {
+  try{
+    const fetchArticles= await getArticles();
+    setArticles(fetchArticles);
+  }catch(error){
+    setError("Error al cargar los artículos");
+  }finally{
+    setLoading(false);
+  }
+};
+
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchArticles = await getArticles();
-        setArticles(fetchArticles);
-      } catch (error) {
-        setError("Error al obtener los artículos");
-      }finally{
-        setLoading(false);
-      }
-    }
     fetchData();
   }, []);
 
@@ -30,7 +31,7 @@ function App() {
     return <p>Cargando artículos...</p>;
   }
 
-  if(error){
+  if (error) {
     return <p>{error}</p>;
   }
 
@@ -39,7 +40,7 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Home articles={articles} />} />
+          <Route path="/" element={<Home articles={articles} fetchData={fetchData}/>} />
           <Route path="/new" element={<New articles={articles} />} />
           <Route path="/article/:id" element={<Article articles={articles} />} />
           <Route path="/submit" element={<SubmitArticle />} />

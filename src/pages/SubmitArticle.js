@@ -19,7 +19,7 @@ const SubmitArticle = () => {
     return (
         <div>
             <h2>Escribir Artículo</h2>
-            <from onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Título"
@@ -41,7 +41,7 @@ const SubmitArticle = () => {
                     required
                 />
                 <button type="submit">Enviar</button>
-            </from>
+            </form>
         </div>
     );
 };
