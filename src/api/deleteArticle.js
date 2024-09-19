@@ -1,4 +1,4 @@
-const API_URL = "/api/articles";
+const API_URL = "http://localhost:3001/articles";
 
 export async function deleteArticle(articleId) {
     try {
