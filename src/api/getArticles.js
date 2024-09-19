@@ -15,7 +15,8 @@ export async function getArticles() {
 
         return await response.json();
     } catch (error) {
-        console.error(error);
+        console.error("Error en getArticles",error);
+        return [];
     }
 }
 

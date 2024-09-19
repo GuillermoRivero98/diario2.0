@@ -9,14 +9,30 @@ import { getArticles } from "./api/getArticles"
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-      const fetchArticles = await getArticles();
-      setArticles(fetchArticles);
+      try {
+        const fetchArticles = await getArticles();
+        setArticles(fetchArticles);
+      } catch (error) {
+        setError("Error al obtener los artículos");
+      }finally{
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
+
+  if (loading) {
+    return <p>Cargando artículos...</p>;
+  }
+
+  if(error){
+    return <p>{error}</p>;
+  }
 
   return (
     <Router>
