@@ -6,6 +6,9 @@ import New from "./pages/News";
 import Article from "./pages/Article";
 import SubmitArticle from "./pages/SubmitArticle";
 import { getArticles } from "./api/getArticles"
+import 'bulma/css/bulma.min.css';
+import './App.css';
+
 
 function App() {
   const [articles, setArticles] = useState([]);
