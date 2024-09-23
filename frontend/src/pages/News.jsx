@@ -1,55 +1,89 @@
-import React, { useState, useEffect } from "react";
-import { getArticles } from "../api/getArticles";
+import React, { useState } from "react";
+import { createArticle } from '../api/createArticle';
 
-const News = () => {
-  const [articles, setArticles] = useState([]);
+const SubmitArticle = ({ fetchData }) => {
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+    const [content, setContent] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const articles = await getArticles();
-        setArticles(articles);
-      } catch (error) {
-        console.error("Error al obtener los artículos", error);
-      }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await createArticle({ title, author, content });
+            fetchData();
+            setTitle('');
+            setAuthor('');
+            setContent('');
+            alert('Artículo enviado exitosamente');
+        } catch (error) {
+            console.error('Error al crear el artículo', error);
+        };
+
+        return (
+            <section className="section">
+                <div className="container">
+                    <h1 className="title has-text-centered">Escribir un Artículo</h1>
+                    <p className="subtitle has-text-centered">Comparte tus ideas sobre la educación en la primera infancia</p>
+                    
+                    <form onSubmit={handleSubmit}>
+                        <div className="field">
+                            <label className="label">Título</label>
+                            <div className="control">
+                                <input
+                                    className="input"
+                                    type="text"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    placeholder="Escribe el título del artículo"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="field">
+                            <label className="label">Autor</label>
+                            <div className="control">
+                                <input
+                                    className="input"
+                                    type="text"
+                                    value={author}
+                                    onChange={(e) => setAuthor(e.target.value)}
+                                    placeholder="Escribe el nombre del autor"
+                                    required
+                                />
+                            </div>
+
+                            <div className="field">
+                                <label className="label">Contenido</label>
+                                <div className="control">
+                                    <textarea
+                                        className="textarea"
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        placeholder="Escribe el contenido del artículo"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="field is-grouped">
+                                    <div className="control">
+                                        <button className="button is-primary">Enviar</button>
+                                    </div>
+                                    <div className="control">
+                                        <button type="reset" className="button is-light" onClick={() => {
+                                            setTitle('');
+                                            setAuthor('');
+                                            setContent('');
+                                        }}>Limpiar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        );
     }
-    fetchData();
-  }, []);
-
-  return (
-    <section id="news" className="new-section">
-      <div className="container">
-        <h1 className="title has-text-centered">Noticias Recientes</h1>
-        <div className="columns is-multiline">
-          {articles.map((article) => (
-            <div key={article.id} className="column is-one-third">
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image is-4by3">
-                    <img src={article.image} alt={article.title} />
-                  </figure>
-                </div>
-                <div className="card-content">
-                  <p className="title is-5">{article.title}</p>
-                  <p className="subtitle is-6">{article.author}</p>
-                  <div className="content">
-                    {article.content.substring(0, 100)}...
-                  </div>
-                </div>
-                <footer className="card-footer">
-                  <p className="card-footer-item">
-                    <span>
-                      Ver más detalles
-                    </span>
-                  </p>
-                </footer>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 };
 
-export default News;
+export default SubmitArticle;

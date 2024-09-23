@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+
+  const [isActive, setisActive] = useState(false);
+
   return (
     <nav className='navbar is-primary' role="navigation" aria-label="main navigation">  
       <div className='navbar-brand'>
         <a className='navbar-item' href='/'>
-          {/*Aca ira el logo */}
           <img src="logo.svg" alt="Logo" width="112" height="28" />
         </a>
 

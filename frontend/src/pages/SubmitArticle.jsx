@@ -5,9 +5,11 @@ const SubmitArticle = ({ fetchData }) => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [content, setContent] = useState("");
+    const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitting(true);
         try {
             await createArticle({ title, author, content });
             fetchData();
@@ -17,6 +19,8 @@ const SubmitArticle = ({ fetchData }) => {
             alert('Artículo enviado exitosamente');
         } catch (error) {
             console.error('Error al crear el artículo', error);
+        }finally{
+            setSubmitting(false);
         };
 
         return (
