@@ -86,4 +86,4 @@ const SubmitArticle = ({ fetchData }) => {
     }
 };
 
-export default SubmitArticle;git
+export default SubmitArticle;
