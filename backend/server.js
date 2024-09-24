@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -8,6 +9,8 @@ const PORT = 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 let articles = [];
 
@@ -60,6 +63,10 @@ app.delete('/articles/:id', (req, res) => {
 
     articles.splice(articleIndex, 1);
     res.status(204).send();
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
 });
 
 app.listen(PORT, () => {
